@@ -1,17 +1,23 @@
-import React, {useEffect, useState} from 'react';
-import './App.css';
+import React, {useEffect, useState} from 'react'; 
+import Game from "./Game";
+import "./App.css";
+
+
 
 function App() {
+  const [games, setGames] = useState([]);
+
   useEffect (   () => {
     getGames()
   }, []);
 
 // pulling and awaiting the response from the gaming API
+const apiBase = "https://api.rawg.io/api/"
 const getGames = async () => {
-  const response = await fetch("https://api.rawg.io/api/platforms")
+  const response = await fetch(`${apiBase}games`)
   const data = await response.json()
+  setGames(data.results);
   console.log(data)
-  console.log("Json test load.")
 }
 
 // Where the HTML will be written 
@@ -24,8 +30,18 @@ const getGames = async () => {
           Search
         </button>
       </form>
+      {games.map(game =>(
+        <Game 
+          key={game.name}
+          name={game.name}
+          // platform={}
+          rating={game.rating}
+          image={game.background_image}
+
+        />
+      ))}
     </div>
   );
-}
+};
 
 export default App;

@@ -42,14 +42,14 @@ const getSearch = e => {
           Search
         </button>
       </form>
-      <div className="flex-wrap pa6 w-90 tc">
+      <div className="flex-wrap pa6 w-50">
       {games.map(game =>(
         <Game 
           key={game.name}
           name={game.name}
           // platform={}
           rating={game.rating}
-          image={game.background_image}
+         image={game.background_image} 
 
         />
       ))}

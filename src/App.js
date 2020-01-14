@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'; 
 import Game from "./Game";
-import "./App.css";
+import "./index.css";
 import { queryAllByAltText } from '@testing-library/dom';
 
 
@@ -44,7 +44,7 @@ const getSearch = e => {
         </button>
       </form>
       
-      <div className=" pa1 w-30 flex flex-wrap m">
+      <div className=" pa1 m">
       {games.map(game =>(
         <Game 
           key={game.name}
@@ -55,6 +55,7 @@ const getSearch = e => {
 
         />
       ))}
+      
     </div>
     </div>
   );

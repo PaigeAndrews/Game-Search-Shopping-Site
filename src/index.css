@@ -13,6 +13,11 @@ code {
 } */
 @import url('https://fonts.googleapis.com/css?family=Girassol&display=swap');
 
+html {
+  margin:0 !important;
+  
+}
+
 body{
   margin: 0;
   background: linear-gradient(90deg, rgba(21,77,82,1) 8%, rgba(26,75,84,1) 100%);
@@ -20,8 +25,16 @@ body{
   font-family: 'Girassol', cursive;
 }
 
-.boxOverflow{
+.gameBlocks{
   overflow: hidden;
-  border: 3px solid white;
+  border: 2px solid white;
+  text-shadow: 3px black;
+  /* width: 30%;
+  height: auto; */
+}
+
+.m{
+  margin:0;
+  grid-gap: 20px;
 }
 

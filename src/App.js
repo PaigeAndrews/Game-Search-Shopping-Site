@@ -34,6 +34,7 @@ const getSearch = e => {
 
 // Where the HTML will be written 
   return (
+    
     <div className="searchArea tc">
       <h1> Videogames Search</h1>
       <form onSubmit={getSearch} className= "search-form">
@@ -42,7 +43,8 @@ const getSearch = e => {
           Search
         </button>
       </form>
-      <div className="flex-wrap pa6 w-50">
+      
+      <div className=" pa1 w-30 flex flex-wrap m">
       {games.map(game =>(
         <Game 
           key={game.name}
@@ -53,7 +55,7 @@ const getSearch = e => {
 
         />
       ))}
-      </div>
+    </div>
     </div>
   );
 };

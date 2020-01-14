@@ -17,6 +17,9 @@ body{
   overflow: hidden;
   border: 2px solid white;
   text-shadow: 3px black;
+  margin:5px;
+  width: 20vw;
+  height: 50vh;
 }
 
 .m{
@@ -32,5 +35,21 @@ body{
   width: 100%;
   row-gap: 20px;
   column-gap: 20px;
+  padding:5px;
 }
 
+.search-bar{
+  margin: 10px;
+  margin-bottom: 5%;
+}
+
+.titleFont{
+  font-size: 2rem;
+  padding: 5px;
+
+}
+
+.gameImage{
+  /* width: 20vw; */
+  height: 70vh;
+}

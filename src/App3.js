@@ -14,29 +14,46 @@ function App() {
 
   //let pagination = 1;
   const loadMoreCommit = () => {
+    console.group('loadMoreCommit:');
+    console.log(page);
+    console.groupEnd();
     setPage(page + 1);
-    // let ok = page + 1;
-    // test(ok);
+    console.group('loadMoreCommit 2:');
+    console.log(page);
+    console.groupEnd();
+    let ok = page + 1;
+    test(ok);
   };
   const loadBackCommit = () => {
+    console.group('loadCommit:');
+    console.log(page);
+    console.groupEnd();
     if(page > 1){
       setPage(page - 1);
       //pagination = pagination - 1;
     }
-    // let ok = page - 1;
-    // test(ok);
+    let ok = page - 1;
+    test(ok);
   };
-  // const test = (ok) => {
-  //   console.group('Test:');
-  //   console.log(ok);
-  //   console.groupEnd();
-  //   getGames(ok);
-  // }
+  const test = (ok) => {
+    console.group('Test:');
+    console.log(ok);
+    console.groupEnd();
+    getGames(ok);
+  }
   useEffect (   () => {
     getGames(page);
   }, [query]);
 
 // pulling and awaiting the response from the gaming API
+// const apiBase = "https://api.rawg.io/api/"
+// const getGames = async () => {
+//   const response = await fetch(`${apiBase}games?page=1&size=200x200`)
+//   const data = await response.json()
+//   setGames(data.results);
+//   console.log(data)
+// }
+
 let apiBase = "https://api.rawg.io/api/games?page="
 let getGames = async (p) => {
   console.group('getGames:');

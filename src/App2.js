@@ -11,19 +11,32 @@ function App() {
   const [query, setQuery] = useState('');
   const [page, setPage] = useState(1);
 
+
+  //let pagination = 1;
   const loadMoreCommit = () => {
     setPage(page + 1);
-    getGames()
+    let ok = page + 1;
+    test(ok);
   };
+
+   //pagination = pagination - 1;
   const loadBackCommit = () => {
     if(page > 1){
       setPage(page - 1);
     }
-    getGames()
+    let ok = page - 1;
+    test(ok);
   };
 
+  const test = (ok) => {
+    console.group('Test:');
+    console.log(ok);
+    console.groupEnd();
+    getGames(ok);
+  }
+
   useEffect (   () => {
-    getGames()
+    getGames(page);
   }, [query]);
 
 // pulling and awaiting the response from the gaming API
@@ -36,12 +49,13 @@ function App() {
 // }
 
 let apiBase = "https://api.rawg.io/api/games?page="
-let getGames = async () => {
-  const response = await fetch(`${apiBase}${page}&size=200x200`)
+let getGames = async (p) => {
+  const response = await fetch(`${apiBase}${p}`)
   const data = await response.json()
-  setGames(data.results);
-  
+  setGames(data.results); 
+  console.log(data)
 }
+
 const updateSearch = e => {
   setSearch(e.target.value);
 }
@@ -50,7 +64,6 @@ const getSearch = e => {
   e.preventDefault();
   setQuery(search);
 }
-console.log(page)
 // Where the HTML will be written 
   return (
     
@@ -66,12 +79,12 @@ console.log(page)
       <div>
          <p>You are on page: {page} </p>
          {page > 1 &&
-          <button onClick={loadBackCommit}>
+          <button onClick={function(){loadBackCommit()}}>
             Back
           </button>
          }
          
-         <button onClick={loadMoreCommit}>
+         <button onClick={function(){loadMoreCommit()}}>
          Next page
         </button>
      </div>
@@ -81,7 +94,7 @@ console.log(page)
         <Game 
           key={game.name}
           name={game.name}
-          // platform={}
+          platform={game.platforms[0].platform.name}
           rating={game.rating}
          image={game.background_image} 
 

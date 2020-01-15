@@ -49,7 +49,11 @@ body{
 
 }
 
+.rating{
+  margin-bottom: 12%;
+}
+
 .gameImage{
-  /* width: 20vw; */
-  height: 70vh;
+  width: auto;
+  height: 100%;
 }

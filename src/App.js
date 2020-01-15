@@ -9,20 +9,31 @@ function App() {
   const [games, setGames] = useState([]);
   const [search, setSearch] = useState('');
   const [query, setQuery] = useState('');
+  const [page, setPage] = useState(1);
+
+  const loadMoreCommit = () => {
+    setPage(page + 1);
+  };
 
   useEffect (   () => {
     getGames()
   }, [query]);
 
 // pulling and awaiting the response from the gaming API
-const apiBase = "https://api.rawg.io/api/"
+// const apiBase = "https://api.rawg.io/api/"
+// const getGames = async () => {
+//   const response = await fetch(`${apiBase}games?page=1&size=200x200`)
+//   const data = await response.json()
+//   setGames(data.results);
+//   console.log(data)
+// }
+const apiBase = "https://api.rawg.io/api/games?page="
 const getGames = async () => {
-  const response = await fetch(`${apiBase}games?size=200x200`)
+  const response = await fetch(`${apiBase}${page}&size=200x200`)
   const data = await response.json()
   setGames(data.results);
-  console.log(data)
+  
 }
-
 const updateSearch = e => {
   setSearch(e.target.value);
 }
@@ -31,7 +42,7 @@ const getSearch = e => {
   e.preventDefault();
   setQuery(search);
 }
-
+console.log(page)
 // Where the HTML will be written 
   return (
     
@@ -43,6 +54,13 @@ const getSearch = e => {
           Search
         </button>
       </form>
+
+      <div>
+         <p>You clicked {page} times</p>
+         <button onClick={loadMoreCommit}>
+         Next page
+        </button>
+     </div>
       
       <div className=" pa1 m">
       {games.map(game =>(
@@ -55,7 +73,7 @@ const getSearch = e => {
 
         />
       ))}
-      
+      {/* <GameList /> */}
     </div>
     </div>
   );

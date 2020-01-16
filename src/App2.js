@@ -8,7 +8,7 @@ import { queryAllByAltText } from '@testing-library/dom';
 function App() {
   const [games, setGames] = useState([]);
   const [search, setSearch] = useState('');
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState('/game_pk');
   const [page, setPage] = useState(1);
 
 
@@ -37,24 +37,32 @@ function App() {
 
   useEffect (   () => {
     getGames(page);
+  }, []);
+
+
+  useEffect ( () =>{
+    getGameSeries();
   }, [query]);
 
-// pulling and awaiting the response from the gaming API
-// const apiBase = "https://api.rawg.io/api/"
-// const getGames = async () => {
-//   const response = await fetch(`${apiBase}games?page=1&size=200x200`)
-//   const data = await response.json()
-//   setGames(data.results);
-//   console.log(data)
-// }
-
-let apiBase = "https://api.rawg.io/api/games?page="
+let apiBase = "https://api.rawg.io/api/games"
 let getGames = async (p) => {
-  const response = await fetch(`${apiBase}${p}`)
-  const data = await response.json()
+  let response = await fetch(`${apiBase}?page=${p}`)
+  //let response = await fetch("https://api.rawg.io/api/games/tomb raider/game-series")
+  let data = await response.json()
   setGames(data.results); 
-  console.log(data)
 }
+
+
+let getGameSeries = async () => {
+  let response2 = await fetch(`${apiBase}${query}/game-series`)
+  // let response2 = await fetch("https://api.rawg.io/api/games/tomb-raider/game-series")
+  let data2 = await response2.json()
+  console.log(data2, query)
+  //setGames(data2.results);
+  setGames(data2.results) 
+  
+}
+
 
 const updateSearch = e => {
   setSearch(e.target.value);
@@ -89,17 +97,16 @@ const getSearch = e => {
         </button>
      </div>
       
-      <div className=" pa1 m">
-      {games.map(game =>(
-        <Game 
-          key={game.name}
-          name={game.name}
-          platform={game.platforms[0].platform.name}
-          rating={game.rating}
-         image={game.background_image} 
-
-        />
-      ))}
+      <div className="pa1 m">
+        {games && games.map(game =>(
+          <Game 
+            key={game.name}
+            name={game.name}
+            platform={game.platforms[0].platform.name}
+            rating={game.rating}
+            image={game.background_image} 
+          />
+        ))}
       {/* <GameList /> */}
     </div>
     </div>

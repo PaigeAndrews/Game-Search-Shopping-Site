@@ -1,0 +1,56 @@
+
+@import url('https://fonts.googleapis.com/css?family=Girassol&display=swap');
+
+html {
+  margin:0 !important;
+  
+}
+
+body{
+  margin: 0;
+  background: linear-gradient(90deg, rgba(21,77,82,1) 8%, rgba(26,75,84,1) 100%);
+  color: white;
+  font-family: 'Girassol', cursive;
+}
+
+.gameBlocks{
+  overflow: hidden;
+  border: 2px solid white;
+  text-shadow: 3px black;
+  margin:5px;
+  width: 20vw;
+  height: 50vh;
+}
+
+.m{
+  margin:0;
+  display: inline-flex;
+  justify-content: center;
+  float: left;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+  row-gap: 20px;
+  column-gap: 20px;
+  padding:5px;
+}
+
+.search-bar{
+  margin: 10px;
+  margin-bottom: 5%;
+}
+
+.titleFont{
+  font-size: 2rem;
+  padding: 5px;
+
+}
+
+.rating{
+  margin-bottom: 12%;
+}
+
+.gameImage{
+  width: auto;
+  height: 100%;
+}

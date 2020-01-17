@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react'; 
 import Game from "./Game";
-import "./index.css";
+import "./App.css";
+import Cart from './Cart';
+import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { queryAllByAltText } from '@testing-library/dom';
 
 
@@ -8,8 +10,13 @@ import { queryAllByAltText } from '@testing-library/dom';
 function App() {
   const [games, setGames] = useState([]);
   const [search, setSearch] = useState('');
-  const [query, setQuery] = useState(search);
   const [page, setPage] = useState(1);
+
+
+
+ 
+
+
 
 
   //let pagination = 1;
@@ -41,29 +48,36 @@ function App() {
   }, []);
 
 
-  useEffect ( () =>{
-    getGameSeries();
-    console.log("Ran effect 2")
-  }, [query]);
-
 let apiBase = "https://api.rawg.io/api/games"
+
 let getGames = async (p) => {
-  let response = await fetch(`${apiBase}?page=${p}`)
-  //let response = await fetch("https://api.rawg.io/api/games/tomb raider/game-series")
-  let data = await response.json()
+let response = await fetch(`${apiBase}?page=${p}`)
+ let data = await response.json()
   setGames(data.results); 
+  console.log(data) 
+  console.log(data.results)
 }
 
 
-let getGameSeries = async () => {
-  let response2 = await fetch(`${apiBase}?search=${query}`)
-  // let response2 = await fetch("https://api.rawg.io/api/games/tomb-raider/game-series")
+let getGameSearch = async (search) => {
+  let response2 = await fetch(`${apiBase}?search=${search}`)
   let data2 = await response2.json()
-  console.log(data2, query, `${apiBase}/${query}/game-series`)
-  //setGames(data2.results);
   setGames(data2.results) 
+  console.log(data2) 
+  console.log(data2.results) 
+  console.log(search) 
   
 }
+
+
+let specificGamePage = async () =>{ 
+  let response3 = await fetch(`${apiBase}`)
+  let data3 = await response3.json()
+  setGames(data3.results)
+  console.log(data3.results)
+};
+
+
 
 
 const updateSearch = e => {
@@ -72,12 +86,19 @@ const updateSearch = e => {
 
 const getSearch = e => {
   e.preventDefault();
-  setQuery(search);
+  getGameSearch(search)
 }
-// Where the HTML will be written 
+
+
+// Where the JSX will be written 
   return (
-    
+  <Router>
     <div className="searchArea tc">
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/cart" component={Cart} />
+      </Switch> 
+
       <h1> Videogames Search</h1>
       <form onSubmit={getSearch} className= "search-form">
         <input className="search-bar" type="text" value={search} onChange={updateSearch} />
@@ -99,20 +120,43 @@ const getSearch = e => {
         </button>
      </div>
       
-      <div className="pa1 m">
-        {games && games.map(game =>(
-          <Game 
-            key={game.name}
-            name={game.name}
-            platform={game.platforms[0].platform.name}
-            rating={game.rating}
-            image={game.background_image} 
-          />
-        ))}
-      {/* <GameList /> */}
+    <div className="pa1 m" onClick={function(){specificGamePage()}}>
+
+      
+        { games.map(game =>(
+      <Game 
+        key={game.id}
+        name={game.name}
+        platform={game.platforms[0].platform.name}
+        released={game.released}
+        image={game.background_image} 
+      />
+      ))} 
     </div>
+
+    <div>
+      <p>You are on page: {page} </p>
+        {page > 1 &&
+    <button onClick={function(){loadBackCommit()}}>
+      Back
+    </button>
+        }
+    
+      <button onClick={function(){loadMoreCommit()}}>
+        Next page
+      </button>
     </div>
+
+</div>
+</Router>
   );
 };
+
+const Home = () => (
+  <div>
+  </div>
+);
+
+
 
 export default App;

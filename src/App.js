@@ -56,7 +56,7 @@ let getGames = async (p) => {
 
 
 let getGameSeries = async () => {
-  let response2 = await fetch(`${apiBase}/${query}/game-series`)
+  let response2 = await fetch(`${apiBase}?search=${query}`)
   // let response2 = await fetch("https://api.rawg.io/api/games/tomb-raider/game-series")
   let data2 = await response2.json()
   console.log(data2, query, `${apiBase}/${query}/game-series`)

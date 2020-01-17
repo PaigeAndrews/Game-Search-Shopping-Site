@@ -12,6 +12,7 @@ function App() {
   const [page, setPage] = useState(1);
 
 
+
   //let pagination = 1;
   const loadMoreCommit = () => {
     setPage(page + 1);
@@ -65,7 +66,12 @@ let getGameSeries = async () => {
 
 
 const updateSearch = e => {
-  setSearch(e.target.value);
+  setSearch(e.target.value)
+  
+  filteredGames(games.filter(game =>
+    game.name.toLowerCase().includes(setSearch.toLowerCase())
+  )),
+  
 }
 
 const getSearch = e => {
@@ -98,7 +104,24 @@ const getSearch = e => {
      </div>
       
       <div className="pa1 m">
-        {games && games.map(game =>(
+
+
+      <div className="pa1 m">
+          {games &&
+            !search &&
+            games.map((game, index) => (
+              <Game
+                key={index}
+                name={game.name}
+                platform={game.platforms[0].platform.name}
+                rating={game.rating}
+                image={game.background_image}
+              />
+            ))}
+
+
+
+        {/* {games && games.map(game =>(
           <Game 
             key={game.name}
             name={game.name}
@@ -106,8 +129,9 @@ const getSearch = e => {
             rating={game.rating}
             image={game.background_image} 
           />
-        ))}
+        ))} */}
       {/* <GameList /> */}
+    </div>
     </div>
     </div>
   );

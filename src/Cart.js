@@ -12,12 +12,14 @@ function Cart(){
 
 
     return (
+        <div className="containerCart">
         <div>
             <Link style={homeLinkStyle} to='/'>
                 <h2> Home </h2>
             </Link>
             <h3 className="cartBox">Cart Box</h3>
         </div>
+        </div> 
     );
 }
 

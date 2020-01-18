@@ -2,7 +2,9 @@ import React, {useEffect, useState} from 'react';
 import Game from "./Game";
 import "./App.css";
 import Cart from './Cart';
+import SelectedGame from './SelectedGame';
 import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { queryAllByAltText } from '@testing-library/dom';
 
 
@@ -11,10 +13,6 @@ function App() {
   const [games, setGames] = useState([]);
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
-
-
-
- 
 
 
 
@@ -73,8 +71,9 @@ let getGameSearch = async (search) => {
 let specificGamePage = async () =>{ 
   let response3 = await fetch(`${apiBase}`)
   let data3 = await response3.json()
-  setGames(data3.results)
-  console.log(data3.results)
+  // setGames(${apiBase}/["id"])
+  // console.log(data3.results["id"])
+  console.log(data3.results.name)
 };
 
 
@@ -93,10 +92,14 @@ const getSearch = e => {
 // Where the JSX will be written 
   return (
   <Router>
+    <div ><Link to="/Cart"><p className="cart">Cart</p>
+    <img src="src\shopping-cart-icon.png"/></Link></div>
+
     <div className="searchArea tc">
       <Switch>
         <Route path="/" exact component={Home} />
-        <Route path="/cart" component={Cart} />
+         <Route path="/Cart" component={Cart} />
+        <Route path="/selectedgame" component={SelectedGame} />
       </Switch> 
 
       <h1> Videogames Search</h1>
@@ -121,17 +124,21 @@ const getSearch = e => {
      </div>
       
     <div className="pa1 m" onClick={function(){specificGamePage()}}>
-
+      <Switch>
+    <Route path="/SelectedGame" component={SelectedGame} />
+    </Switch>
       
         { games.map(game =>(
       <Game 
-        key={game.id}
+        key={game["id"]}
+        code={game["id"]}
         name={game.name}
         platform={game.platforms[0].platform.name}
         released={game.released}
         image={game.background_image} 
       />
       ))} 
+       
     </div>
 
     <div>
@@ -157,6 +164,10 @@ const Home = () => (
   </div>
 );
 
+// const Cart = () => (
+//   <div>
+//   </div>
+// );
 
 
 export default App;

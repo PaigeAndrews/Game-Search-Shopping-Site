@@ -9,7 +9,7 @@ import { queryAllByAltText } from '@testing-library/dom';
 
 
 
-function App() {
+function Home() {
   const [games, setGames] = useState([]);
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
@@ -84,18 +84,12 @@ const getSearch = e => {
 
 // Where the JSX will be written 
   return (
-  <Router>
+  <div>
     <div ><Link to="/Cart"><p className="cart">Cart</p>
     <img src="public/shopping-cart-icon.png"/></Link></div>
 
     <div className="searchArea tc">
-      <Switch>
-      <Route exact path="/" component={Home} />
-      <Route exact path="/Cart" component={Cart} />
-        <Route path="/selectedgame" component={SelectedGame} />
-        
-      </Switch> 
-
+      
       <h1> Videogames Search</h1>
       <form onSubmit={getSearch} className= "search-form">
         <input className="search-bar" type="text" value={search} onChange={updateSearch} />
@@ -147,19 +141,9 @@ const getSearch = e => {
     </div>
 
 </div>
-</Router>
+</div>
   );
 };
 
-const Home = () => (
-  <div>
-  </div>
-);
 
-// const Cart = () => (
-//   <div>
-//   </div>
-// );
-
-
-export default App;
+export default Home;

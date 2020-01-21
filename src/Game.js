@@ -1,4 +1,8 @@
 import React from 'react'; 
+import "./App.css";
+import SelectedGame from './SelectedGame';
+import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 
@@ -6,11 +10,15 @@ const Game = ({name, released, image, platform, code}) => {
 
     const gameLogger = e => {
         
+        console.log(name)
         console.log(e)
     }
 
     return(
-        <div className="shadow-5 br4 gameBlocks" onClick={function(){gameLogger(code)}}>
+        // <Router>
+        //    <Switch> <Route path="/selectedgame" exact component={SelectedGame} /> </Switch>
+           <Link to="/selectedgame" style={{ textDecoration: 'none' }}>
+        <div className="shadow-5 br4 gameBlocks"  onClick={function(){gameLogger(code)}}>
             <div className="fw5 titleFont">{name}</div>
             <p>{platform}</p>
             <p>{code}</p>
@@ -19,6 +27,8 @@ const Game = ({name, released, image, platform, code}) => {
                 <img src={image} alt=""/>
             </div>
         </div>
+        </Link>
+        // </Router>
     );
 }
 

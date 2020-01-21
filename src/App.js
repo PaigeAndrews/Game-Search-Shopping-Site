@@ -50,31 +50,23 @@ let apiBase = "https://api.rawg.io/api/games"
 
 let getGames = async (p) => {
 let response = await fetch(`${apiBase}?page=${p}`)
- let data = await response.json()
-  setGames(data.results); 
-  console.log(data) 
-  console.log(data.results)
+ let dataPage = await response.json()
+  setGames(dataPage.results);
 }
 
 
 let getGameSearch = async (search) => {
   let response2 = await fetch(`${apiBase}?search=${search}`)
-  let data2 = await response2.json()
-  setGames(data2.results) 
-  console.log(data2) 
-  console.log(data2.results) 
-  console.log(search) 
-  
+  let dataSearch = await response2.json()
+  setGames(dataSearch.results)
 }
 
 
-let specificGamePage = async () =>{ 
-  let response3 = await fetch(`${apiBase}`)
-  let data3 = await response3.json()
-  // setGames(${apiBase}/["id"])
-  // console.log(data3.results["id"])
-  console.log(data3.results.name)
-};
+// let specificGamePage = async () =>{ 
+//   let response3 = await fetch(`${apiBase}`)
+//   let dataGame = await response3.json()
+//   console.log(dataGame)
+// };
 
 
 
@@ -87,6 +79,7 @@ const getSearch = e => {
   e.preventDefault();
   getGameSearch(search)
 }
+
 
 
 // Where the JSX will be written 
@@ -123,10 +116,8 @@ const getSearch = e => {
         </button>
      </div>
       
-    <div className="pa1 m" onClick={function(){specificGamePage()}}>
-      <Switch>
-    <Route path="/SelectedGame" component={SelectedGame} />
-    </Switch>
+    <div className="pa1 m">
+    
       
         { games.map(game =>(
       <Game 

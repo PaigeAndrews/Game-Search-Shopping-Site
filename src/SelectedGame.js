@@ -17,6 +17,7 @@ const SelectedGame = ({name, released, image, platform}) => {
     </Link>
 
         <div className="shadow-5 br4 gameBlocks">
+            <h1>YOU SWITCHED PAGES</h1>
             <div className="fw5 titleFont">{name}</div>
             <p>{platform}</p>
             <p className="rating">{released}</p>

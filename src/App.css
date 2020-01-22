@@ -64,4 +64,11 @@ body{
 
 .cart{
     color:white;
+    float: right;
+    height: 100px;
+    width: auto;
+}
+
+.mainTitle{
+  height: 1rem;
 }

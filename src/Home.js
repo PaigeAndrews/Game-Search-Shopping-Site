@@ -49,8 +49,8 @@ function Home() {
 let apiBase = "https://api.rawg.io/api/games"
 
 let getGames = async (p) => {
-let response = await fetch(`${apiBase}?page=${p}`)
- let dataPage = await response.json()
+  let response = await fetch(`${apiBase}?page=${p}`)
+  let dataPage = await response.json()
   setGames(dataPage.results);
 }
 
@@ -85,11 +85,14 @@ const getSearch = e => {
 // Where the JSX will be written 
   return (
   <div>
-    <div ><Link to="/Cart"><p className="cart">Cart</p>
-    <img src="public/shopping-cart-icon.png"/></Link></div>
+    <div >
+      <Link to="/Cart">
+        <p className="cart" >Cart</p>
+        <img src="public/shopping-cart-icon.png" className="cart"/>
+      </Link>
+    </div>
 
     <div className="searchArea tc">
-      
       <h1> Videogames Search</h1>
       <form onSubmit={getSearch} className= "search-form">
         <input className="search-bar" type="text" value={search} onChange={updateSearch} />
@@ -130,17 +133,17 @@ const getSearch = e => {
     <div>
       <p>You are on page: {page} </p>
         {page > 1 &&
-    <button onClick={function(){loadBackCommit()}}>
-      Back
-    </button>
+        <button onClick={function(){loadBackCommit()}}>
+            Back
+        </button>
         }
     
-      <button onClick={function(){loadMoreCommit()}}>
-        Next page
-      </button>
+        <button onClick={function(){loadMoreCommit()}}>
+            Next page
+        </button>
     </div>
 
-</div>
+  </div>
 </div>
   );
 };

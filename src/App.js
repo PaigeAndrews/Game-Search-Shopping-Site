@@ -19,7 +19,7 @@ function App() {
      
       <Route exact path="/" component={Home} />
       <Route  path="/cart" component={Cart} />
-      <Route path="/selectedgame" component={SelectedGame} />
+      <Route  path="/selectedgame" component={SelectedGame} />
       
 
   </Router>

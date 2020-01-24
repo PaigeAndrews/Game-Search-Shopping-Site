@@ -1,5 +1,5 @@
 # Gamer Searh Shopping Site
-A mock-up site that allows you to search for games and add them to cart using React, React-Router, APIs, json and JSX.
+A mock-up site that allows you to search for games, look at each individual games details, and add them to cart using React, React-Router, APIs, json and JSX.
 Contains the images, platform, ratings, and details of 355,587 games.
 
 

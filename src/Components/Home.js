@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'; 
 import Game from "./Game";
-import "./App.css";
+import "../App.css";
 import Cart from './Cart';
 import SelectedGame from './SelectedGame';
 import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -62,14 +62,6 @@ let getGameSearch = async (search) => {
 }
 
 
-// let specificGamePage = async () =>{ 
-//   let response3 = await fetch(`${apiBase}`)
-//   let dataGame = await response3.json()
-//   console.log(dataGame)
-// };
-
-
-
 
 const updateSearch = e => {
   setSearch(e.target.value);
@@ -85,6 +77,10 @@ const getSearch = e => {
 // Where the JSX will be written 
   return (
   <div>
+
+
+
+
     <div >
       <Link to="/Cart">
         <p className="cart" >Cart</p>
